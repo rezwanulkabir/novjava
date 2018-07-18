@@ -1,0 +1,95 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans.xsd 
+http://www.springframework.org/schema/jee 
+http://www.springframework.org/schema/jee/spring-jee.xsd 
+http://www.springframework.org/schema/tx 
+http://www.springframework.org/schema/tx/spring-tx.xsd
+http://www.springframework.org/schema/data/jpa 
+http://www.springframework.org/schema/data/jpa/spring-jpa.xsd 
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context.xsd
+http://www.springframework.org/schema/util 
+http://www.springframework.org/schema/util/spring-util.xsd
+http://www.springframework.org/schema/aop 
+http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<bean id="customer" class="com.cubic.spring.Customer"
+		scope="prototype" init-method="init" destroy-method="cleanUp">
+		<property name="id" value="100"></property>
+		<property name="firstName" value="Jim"></property>
+		<property name="lastName" value="Smith"></property>
+	</bean>
+
+	<bean id="customer2" class="com.cubic.spring.Customer">
+		<property name="id" value="400"></property>
+		<property name="firstName" value="Bob"></property>
+		<property name="lastName" value="Jackson"></property>
+	</bean>
+
+	<bean id="customer3" class="com.cubic.spring.Customer">
+		<constructor-arg index="0" value="200"></constructor-arg>
+		<constructor-arg index="1" value="Chirag"></constructor-arg>
+		<constructor-arg index="2" value="Subedi"></constructor-arg>
+	</bean>
+	<bean id="customer4" class="com.cubic.spring.Customer">
+		<constructor-arg index="0" value="Tulasi"></constructor-arg>
+		<constructor-arg index="1" value="Khanal"></constructor-arg>
+	</bean>
+	<bean id="baseCustomer" class="com.cubic.spring.Customer">
+		<property name="id" value="400"></property>
+		<property name="firstName" value="Bob"></property>
+		<property name="lastName" value="Jackson"></property>
+		<property name="version" value="2.0"></property>
+	</bean>
+	<bean id="myCustomer1" class="com.cubic.spring.Customer" parent="baseCustomer">
+		<property name="id" value="100"></property>
+		<property name="home" ref="homeAddr"></property>
+		<property name="office" ref="officeAddr"></property>
+	</bean>
+	<bean id="custCollections1" class="com.cubic.spring.Customer" parent="baseCustomer">
+	<property name="version" value="1.8"></property>
+	<property name="comments">
+		<list>
+			<value>comment1</value>
+			<value>comment2</value>
+		</list>
+	</property>
+	<property name="hobbies">
+	<set>
+			<value>cricket</value>
+			<value>cricket</value>
+			<value>football</value>
+	</set>
+	</property>
+	<property name="books">
+		<map>
+		 <entry key="java" value="CompleteReference java"></entry>
+		 <entry key="python" value="complete python reference"></entry>
+		</map>
+	</property>
+	
+	</bean>
+	
+	<bean id="homeAddr" class="com.cubic.spring.Address">
+	<property name="street" value ="917 del paso"></property>
+	<property name="city" value="Euless"></property>
+	<property name="state" value="TX"></property>
+	<property name="zipCode" value="76040"></property>
+	</bean>
+		<bean id="officeAddr" class="com.cubic.spring.Address">
+	<property name="street" value ="N skyway Circle"></property>
+	<property name="city" value="Irving"></property>
+	<property name="state" value="TX"></property>
+	<property name="zipCode" value="75063"></property>
+	</bean>
+	
+</beans>
